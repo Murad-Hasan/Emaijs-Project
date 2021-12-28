@@ -21,8 +21,10 @@ body {
 .top_button:hover {
   background: #adb7c2;
 }
-.top_button > span {
+.top_button > .signIn_button {
   background: #2e56cc;
+  color: white;
+  text-decoration: none;
 }
 
 #contact {
