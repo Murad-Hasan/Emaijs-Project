@@ -9,7 +9,7 @@ otpBoxDiv.classList.add("d-none");
 otpBoxDiv.innerHTML = `<fieldset>
 <label for="number">OTP</label><br />
 <input
-  type="number"
+  type="text"
   name="number"
   tabindex="2"
   required
@@ -153,6 +153,4 @@ function success() {
     title: "Successfully sent message",
     text: "Successfully sent message",
   });
-  const closeModel = document.getElementById("contact-submit");
-  closeModel.setAttribute("data-bs-dismiss", "modal");
 }
