@@ -7,6 +7,8 @@ const otpBoxDiv = document.createElement("div");
 otpBoxDiv.setAttribute("id", "optBox");
 otpBoxDiv.classList.add("d-none");
 otpBoxDiv.innerHTML = `<fieldset>
+<p>Enter your OTP here</p>
+<span class='text-danger'>Check Your Inbox and also your spam folder.</span>
 <label for="number">OTP</label><br />
 <input
   type="text"
