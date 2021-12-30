@@ -117,22 +117,6 @@ function validate() {
     }
   });
 
-  // emailSubmitBtn.addEventListener("click", (e) => {
-  //   e.preventDefault();
-  //   filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  //   if (filter.test(email.value)) {
-
-  //     emailBox.classList.add("d-none");
-  //     optBox.classList.remove("d-none");
-  //   } else {
-  //     if (email.value == "") {
-  //       emptyerror();
-  //     } else {
-  //       error();
-  //     }
-  //   }
-  // });
-
   otpSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (otp.value == "") {
